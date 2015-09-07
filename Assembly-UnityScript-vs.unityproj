@@ -48,8 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\old\BounceObject.js" />
      <Compile Include="Assets\scripts\old\OutOfBounds.js" />
-     <Compile Include="Assets\scripts\old\PaddleController.js" />
-     <Compile Include="Assets\scripts\old\PullSpring.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor 5.1.1f1/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
