@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Board : MonoBehaviour {
+public class Ball : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

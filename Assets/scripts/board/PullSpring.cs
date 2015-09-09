@@ -6,7 +6,7 @@ public class PullSpring:MonoBehaviour
 	public string inputButtonName = "Fire1";
 	public float distance = 50;
 	public float speed = 1;
-	public GameObject ball;
+	public GameObject _ball;
 	public float Acceleration = 500;
 
 	public bool ready = false;
@@ -15,6 +15,7 @@ public class PullSpring:MonoBehaviour
 
 	void OnCollisionEnter(Collision other)
 	{
+		_ball = other.gameObject;
 		//if(other.gameObject.tag == "Ball") {
 		ready = true;
 		//}
@@ -22,6 +23,7 @@ public class PullSpring:MonoBehaviour
 
 	void OnCollisionexit(Collision other)
 	{
+		_ball = null;
 		//if(other.gameObject.tag == "Ball") {
 		ready = false;
 		//}
@@ -40,9 +42,8 @@ public class PullSpring:MonoBehaviour
 		} else if(followedDistance > 0) {
 			//Shoot the ball
 			if(fire && ready) {
-				ball.transform.TransformDirection(Vector3.forward * 10);
-				//ball.GetComponent.<Rigidbody>().AddForce(0, 0, moveCount * power);
-				ball.GetComponent<Rigidbody>().AddForce(Vector3.forward * (Acceleration * followedDistance / distance), ForceMode.Acceleration);
+				_ball.transform.TransformDirection(Vector3.forward * 10);
+				_ball.GetComponent<Rigidbody>().AddForce(Vector3.forward * (Acceleration * followedDistance / distance), ForceMode.Acceleration);
 				fire = false;
 				ready = false;
 			}

@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bumper:MonoBehaviour
+public class Bumper:Obstacle
 {
+	public override ObstacleType Type
+	{
+		get { return ObstacleType.Bumper; }
+	}
+
 	public float Force;
 	public float ForceRadius;
 	public AnimationCurve HighlightCurve;
@@ -20,13 +25,15 @@ public class Bumper:MonoBehaviour
 		_startSize = transform.localScale;
 	}
 
-	private void OnCollisionEnter()
+	protected override void OnCollisionEnter(Collision collision)
 	{
+		base.OnCollisionEnter(collision);
+
 		foreach(Collider col in Physics.OverlapSphere(transform.position, ForceRadius)) {
 			if(col.GetComponent<Rigidbody>()) {
 				col.GetComponent<Rigidbody>().AddExplosionForce(Force, transform.position, ForceRadius);
 				_time = 0;
-				
+				Game.ObstacleHandler[UintType](this);
 				//_isActive = true;
 			}
 		}
@@ -36,7 +43,7 @@ public class Bumper:MonoBehaviour
 	public Color DebugColor;
 	private void Update()
 	{
-		if (_time > 1) {
+		if(_time > 1) {
 			return;
 		}
 		_time += Time.deltaTime;
