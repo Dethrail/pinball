@@ -7,8 +7,7 @@ public class Game:MonoBehaviour
 {
 	public static Game Instance;
 
-	public Transform LauncherPoint;
-	public Transform Table;
+	public Transform LauncherPosition;
 	public Ball BallPrefab;
 
 	public int Lives;
@@ -59,14 +58,13 @@ public class Game:MonoBehaviour
 		TotalScore.Add(CurrentScore);
 		CurrentScore = 0;
 		_cacheTotalScore = TotalScore.Sum();
-		//Debug.Log(_cacheTotalScore);
+		Debug.Log(_cacheTotalScore);
 		if(Lives == 0) {
 			return;
 		}
 	
 		Lives--;
 		Ball ball = Instantiate(BallPrefab) as Ball;
-		ball.transform.parent = Table;
-		ball.transform.position = LauncherPoint.position;
+		ball.transform.position = LauncherPosition.position;
 	}
 }
