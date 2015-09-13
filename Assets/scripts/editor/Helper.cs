@@ -95,7 +95,7 @@ public class Helper
 		return true;
 	}
 
-	[MenuItem("GameObject/Selection/Toggle 'Active' #&a")]
+	[MenuItem("GameObject/Selection/Toggle 'Active' #a")]
 	static void ActivateDeactivate()
 	{
 		if(HasValidTransform()) {

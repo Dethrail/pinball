@@ -9,7 +9,7 @@ public class Bumper:Obstacle
 	}
 
 	public float Force;
-	public float ForceRadius;
+	//public float ForceRadius;
 	public AnimationCurve HighlightCurve;
 	public AnimationCurve SizeCurve;
 	public Color HighlightColor;
@@ -29,9 +29,9 @@ public class Bumper:Obstacle
 	{
 		base.OnCollisionEnter(collision);
 
-		foreach(Collider col in Physics.OverlapSphere(transform.position, ForceRadius)) {
+		foreach(Collider col in Physics.OverlapSphere(collision.contacts[0].point, 1)) { // ForceRadius
 			if(col.GetComponent<Rigidbody>()) {
-				col.GetComponent<Rigidbody>().AddExplosionForce(Force, transform.position, ForceRadius);
+				col.GetComponent<Rigidbody>().AddExplosionForce(Force, collision.contacts[0].point, 1); // ForceRadius
 				_time = 0;
 				Game.ObstacleHandler[UintType](this);
 				//_isActive = true;
@@ -39,8 +39,6 @@ public class Bumper:Obstacle
 		}
 	}
 
-
-	public Color DebugColor;
 	private void Update()
 	{
 		if(_time > 1) {
@@ -48,10 +46,7 @@ public class Bumper:Obstacle
 		}
 		_time += Time.deltaTime;
 		transform.localScale = _startSize * SizeCurve.Evaluate(_time);
-		//var col = 
-		DebugColor = HighlightColor * HighlightCurve.Evaluate(_time);
-		//_mat.SetColor("_SpecColor", col);
-		_mat.SetColor("_SpecColor", DebugColor);
+		_mat.SetColor("_SpecColor", HighlightColor * HighlightCurve.Evaluate(_time));
 
 	}
 }

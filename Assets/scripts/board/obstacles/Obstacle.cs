@@ -1,10 +1,11 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using System.Linq;
 using UnityEngine;
-using System.Collections;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class Obstacle:MonoBehaviour, IObstacle
 {
+	public bool OverrideXMLSettings = false;
+
 	public virtual ObstacleType Type
 	{
 		get { return ObstacleType.None; }
@@ -14,18 +15,29 @@ public class Obstacle:MonoBehaviour, IObstacle
 	{
 		get { return (uint)Type; }
 	}
-
+	[HideInInspector]
 	public int Score;
 	public int GetScore()
 	{
 		return Score;
 	}
 
+	[HideInInspector]
 	public Ball Trigger;
-
 	public Ball GetTrigger()
 	{
 		return Trigger;
+	}
+
+	private void Start()
+	{
+		if(!OverrideXMLSettings) {
+			try {
+				Score = Settings.Instance.ObstacleScore.First(x => x.Name == Type.ToString()).Score; // if exeption on this string, delete settings
+			} catch(Exception) {
+				throw new Exception("Can't find ObstacleType in Settings, just delete or fix settings.xml 'StreamingAssets'");
+			}
+		}
 	}
 
 	protected virtual void OnCollisionEnter(Collision collision)
@@ -39,12 +51,10 @@ public class Obstacle:MonoBehaviour, IObstacle
 	//public AnimationCurve HighlightCurve;
 	//public AnimationCurve SizeCurve;
 	//public Color HighlightColor;
-
 	////private bool _isActive;
 	//private float _time = 1; // disable first play
 	//private Material _mat;
 	//private Vector3 _startSize;
-
 	//private void Awake()
 	//{
 	//	_mat = GetComponent<MeshRenderer>().material;
@@ -57,7 +67,6 @@ public class Obstacle:MonoBehaviour, IObstacle
 	//		if(col.GetComponent<Rigidbody>()) {
 	//			col.GetComponent<Rigidbody>().AddExplosionForce(Force, transform.position, ForceRadius);
 	//			_time = 0;
-
 	//			//_isActive = true;
 	//		}
 	//	}
@@ -76,7 +85,6 @@ public class Obstacle:MonoBehaviour, IObstacle
 	//	DebugColor = HighlightColor * HighlightCurve.Evaluate(_time);
 	//	//_mat.SetColor("_SpecColor", col);
 	//	_mat.SetColor("_SpecColor", DebugColor);
-
 	//}
 }
 
