@@ -2,6 +2,9 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// AI ball controll flippers and launch
+/// </summary>
 public class BallAI:MonoBehaviour
 {
 	public Rigidbody BallRigidbody;
@@ -36,17 +39,10 @@ public class BallAI:MonoBehaviour
 
 	public IEnumerator Launch(float time) // launch ball
 	{
-		while(true) {
-			yield return new WaitForSeconds(time);
-			if(BallRigidbody.velocity == Vector3.zero) {
-				Game.Instance.PullSpring.Fire = true;
-				break;
-			}
+		Game.Instance.PullSpring.SpringPower = Random.Range(0.3f, 1); // random pull spring 
+		yield return new WaitForSeconds(time);
 
-			if((BallRigidbody.transform.position - Game.Instance.LauncherPoint.position).sqrMagnitude > 2) { // break infinity while
-				break;
-			}
-		}
+		Game.Instance.PullSpring.Fire = true;
 	}
 
 	public void OnTriggerExit(Collider collider)

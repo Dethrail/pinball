@@ -95,7 +95,7 @@ public class Helper
 		return true;
 	}
 
-	[MenuItem("GameObject/Selection/Toggle 'Active' #a")]
+	[MenuItem("GameObject/Selection/Toggle 'Active' #&a")]
 	static void ActivateDeactivate()
 	{
 		if(HasValidTransform()) {
@@ -105,5 +105,11 @@ public class Helper
 				go.SetActive(val);
 			}
 		}
+	}
+
+	[MenuItem("AssetBundles/Clear Cache")]
+	static void ClearCache()
+	{
+		Caching.CleanCache();
 	}
 }

@@ -17,9 +17,9 @@ public sealed class Settings
 
 	public static void Create()
 	{
-		if(!LocalFolderExists()) {
-			WriteToLocalStorage();
-		}
+		//if(!LocalFolderExists()) {
+		//	WriteToLocalStorage();
+		//}
 		var resourceDirectory = GetTextFilesFromDirectory(GetLocalFilesDirectory());
 		foreach(var settings in resourceDirectory) {
 
@@ -66,15 +66,16 @@ public sealed class Settings
 #endif
 	}
 
-	public static void WriteToLocalStorage()
-	{
-		string srcDir = GetSourceDirectory();
-		string dstDir = GetLocalFilesDirectory();
-		var villageInputFiles = GetTextFilesFromDirectory(GetSourceDirectory()).Select(x => x.Substring(srcDir.Length + 1));
-		foreach(var villageFile in villageInputFiles) {
-			File.Copy(Path.Combine(srcDir, villageFile), Path.Combine(dstDir, villageFile), true);
-		}
-	}
+	//public static void WriteToLocalStorage()
+	//{
+	//	string srcDir = GetSourceDirectory();
+	//	string dstDir = GetLocalFilesDirectory();
+	//	var villageInputFiles = GetTextFilesFromDirectory(GetSourceDirectory()).Select(x => x.Substring(srcDir.Length + 1));
+	//	Debug.LogError(villageInputFiles.First());
+	//	foreach(var villageFile in villageInputFiles) {
+	//		File.Copy(Path.Combine(srcDir, villageFile), Path.Combine(dstDir, villageFile), true);
+	//	}
+	//}
 
 	public void Save()
 	{

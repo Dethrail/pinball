@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// add acceleration to ball
+/// </summary>
 public class PullSpring:MonoBehaviour
 {
 	public GameObject _ball;
@@ -16,7 +19,7 @@ public class PullSpring:MonoBehaviour
 		
 		if (Game.Instance.AIGame) {
 			BallAI ballAI = _ball.GetComponentInChildren<BallAI>();
-			ballAI.StartCoroutine(ballAI.Launch(0.5f));
+			ballAI.StartCoroutine(ballAI.Launch(1.3f));
 		}
 
 		UIWindowManager.WindowHUD.ShowHideLauncher(true);
@@ -30,10 +33,9 @@ public class PullSpring:MonoBehaviour
 
 	private void Update()
 	{
-		//Fire = Input.GetButton(inputButtonName);
-
 		if(Fire && Ready) {
 			_ball.transform.TransformDirection(Vector3.forward * 10);
+			SpringPower = Mathf.Max(0.05f, SpringPower); // min value for push the ball and allow again trigger OnCollisionEnter
 			_ball.GetComponent<Rigidbody>().AddForce(Vector3.forward * Acceleration * SpringPower, ForceMode.Acceleration);
 			Fire = false;
 			Ready = false;

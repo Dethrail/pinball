@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Flipper, fixed by hingejoint 
+/// Allows player control the ball
+/// </summary>
 public class Flipper:MonoBehaviour
 {
 	public bool IsLeftFlipper;
@@ -10,6 +14,12 @@ public class Flipper:MonoBehaviour
 	private void Start()
 	{
 		_joint = GetComponent<HingeJoint>();
+
+		if(IsLeftFlipper) {
+			Game.Instance.LeftFlippers.Add(this);
+		} else {
+			Game.Instance.RightFlippers.Add(this);
+		}
 	}
 
 	private bool _triggerAI;
@@ -21,8 +31,9 @@ public class Flipper:MonoBehaviour
 			_triggerAI = value;
 			_timerAI = 0;
 		}
-
 	}
+
+	public bool TriggerUI;
 
 
 	private float _timerAI;
@@ -40,19 +51,23 @@ public class Flipper:MonoBehaviour
 		sj.damper = 1;
 
 		if(IsLeftFlipper) {
-			if(Input.GetKey(KeyCode.LeftArrow) || TriggerAI) {
+			if(Input.GetKeyUp(KeyCode.LeftArrow) || !TriggerUI || (Game.Instance.AIGame && !TriggerAI)) {
+				sj.targetPosition = 0;
+			}
+
+			if(Input.GetKey(KeyCode.LeftArrow) || TriggerUI || TriggerAI) {
 				sj.targetPosition = TargetRotation;
 			}
-			if(Input.GetKeyUp(KeyCode.LeftArrow) || (Game.Instance.AIGame && !TriggerAI)) {
+
+		} else {
+			if(Input.GetKeyUp(KeyCode.RightArrow) || !TriggerUI || (Game.Instance.AIGame && !TriggerAI)) {
 				sj.targetPosition = 0;
 			}
-		} else {
-			if(Input.GetKey(KeyCode.RightArrow) || TriggerAI) {
+
+			if(Input.GetKey(KeyCode.RightArrow) || TriggerUI || TriggerAI) {
 				sj.targetPosition = -TargetRotation;
 			}
-			if(Input.GetKeyUp(KeyCode.RightArrow) || (Game.Instance.AIGame && !TriggerAI)) {
-				sj.targetPosition = 0;
-			}
+
 		}
 
 		_joint.spring = sj;

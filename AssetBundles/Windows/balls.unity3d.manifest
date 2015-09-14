@@ -1,0 +1,46 @@
+ManifestFileVersion: 0
+CRC: 940856432
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1b11e1ce0f1aee50eb7ba917edf5897d
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 91e239d5c010f7f6774228afcead326b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 357f1584bdc311f4e922e985b4cc6ba7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 12adee1b3d408324e83d44c17f6024d0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 134
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+Assets:
+- Assets/game objects/prefabs/ball/ball2.prefab
+- Assets/StreamingAssets/settings.xml
+- Assets/game objects/prefabs/ball/ball1.prefab
+Dependencies: []

@@ -1,26 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// Main menu
+/// </summary>
 public class UIWindowMenu:UIWindow
 {
 	public Text PlayRestartText;
-	public Text PlayAIRestartText;
+	public Text PlayRestartAIText;
 	public Button ButtonResume;
+	public Button ButtonPlayRestart;
+	public Button ButtonPlayRestartAI;
+	public Text DonwloadNotice;
+
+	public Button[] BallButtons;
 
 	protected override void OnInitialize()
 	{
 		base.OnInitialize();
 		ButtonResume.gameObject.SetActive(false);
+		DisableButtons();
 	}
-	
+
 	public void OnPlayRestartClick()
 	{
 		PlayRestartText.text = "Restart";
-		PlayAIRestartText.text = "Play AI";
+		PlayRestartAIText.text = "Play AI";
 
 		Game.Instance.StartGame();
 	}
@@ -28,18 +35,22 @@ public class UIWindowMenu:UIWindow
 	public void OnPlayRestartAIClick()
 	{
 		PlayRestartText.text = "Play";
-		PlayAIRestartText.text = "Restart AI";
+		PlayRestartAIText.text = "Restart AI";
 
 		Game.Instance.StartGameAI();
+	}
+
+	public void OnBallSelect(int index)
+	{
+		BallButtons[index].interactable = false;
+		BallButtons[index ^ 1].interactable = true;
+
+		Game.Instance.SwitchBalls(index);
 	}
 
 	public void OnResumeClick()
 	{
 		Game.Instance.GameResume();
-	}
-
-	public void OnGlobalScoreClick()
-	{
 	}
 
 	public void OnExitClick()
@@ -63,6 +74,25 @@ public class UIWindowMenu:UIWindow
 		base.OnHid();
 		foreach(UIWindow window in _windows) {
 			window.Show();
+		}
+	}
+
+	public void EnableButtons()
+	{
+		ButtonPlayRestart.interactable = true;
+		ButtonPlayRestartAI.interactable = true;
+		DonwloadNotice.gameObject.SetActive(false);
+		foreach(Button button in BallButtons) {
+			button.gameObject.SetActive(true);
+		}
+	}
+
+	public void DisableButtons()
+	{
+		ButtonPlayRestart.interactable = false;
+		ButtonPlayRestartAI.interactable = false;
+		foreach(Button button in BallButtons) {
+			button.gameObject.SetActive(false);
 		}
 	}
 }

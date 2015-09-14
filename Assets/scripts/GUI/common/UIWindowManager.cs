@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Window Manage know about all widnows in UI.
+/// </summary>
 public class UIWindowManager:MonoBehaviour
 {
 	public static UIWindowManager Instance;
@@ -70,4 +73,5 @@ public enum UIWindowTypes
 	None,
 	HUD, // head-up display
 	Menu,
+	GameOver,
 }
