@@ -36,7 +36,7 @@ public class LoadedAssetBundle
 public class AssetBundleManager:MonoBehaviour
 {
 #if UNITY_EDITOR
-	private readonly static string m_BaseDownloadingURL = "https://s3.eu-central-1.amazonaws.com/pood/pinball/Android/"; // active editor platform
+	private readonly static string m_BaseDownloadingURL = "https://s3.eu-central-1.amazonaws.com/pood/pinball/Windows/"; // active editor platform
 #else
 #if UNITY_STANDALONE
 	private readonly static string m_BaseDownloadingURL = "https://s3.eu-central-1.amazonaws.com/pood/pinball/Windows/";
