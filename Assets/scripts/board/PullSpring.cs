@@ -6,10 +6,13 @@ using System.Collections;
 /// </summary>
 public class PullSpring:MonoBehaviour
 {
-	public GameObject _ball;
+	private GameObject _ball;
 	public float Acceleration = 500;
+	[HideInInspector]
 	public float SpringPower;
+	[HideInInspector]
 	public bool Ready = false;
+	[HideInInspector]
 	public bool Fire = false;
 
 	private void OnCollisionEnter(Collision other)
