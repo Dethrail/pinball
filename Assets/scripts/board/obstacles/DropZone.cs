@@ -8,10 +8,6 @@ public class DropZone:Obstacle
 		get { return ObstacleType.DropZone; }
 	}
 
-	private void Awake()
-	{
-	}
-
 	protected override void OnCollisionEnter(Collision collision)
 	{
 		base.OnCollisionEnter(collision);

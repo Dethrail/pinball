@@ -16,7 +16,7 @@ public class LoadAssets:BaseLoader
 		yield return StartCoroutine(LoadPrefab2GameDirector(assetBundleName, assetName2));
 
 		// Unload assetBundles.
-		(UIWindowManager.Instance.GetWindow(UIWindowTypes.Menu) as UIWindowMenu).EnableButtons();
+		UIWindowManager.WindowMenu.EnableButtons();
 		AssetBundleManager.UnloadAssetBundle(assetBundleName);
 	}
 

@@ -33,11 +33,12 @@ public class Flipper:MonoBehaviour
 		}
 	}
 
+	[HideInInspector]
 	public bool TriggerUI;
 
-
+	public float LockAITimer = 1f;
 	private float _timerAI;
-	public float LockAITimer = 0.5f;
+
 
 	private void Update()
 	{
@@ -46,9 +47,7 @@ public class Flipper:MonoBehaviour
 			TriggerAI = false;
 		}
 
-		JointSpring sj = new JointSpring();
-		sj.spring = 10000;
-		sj.damper = 1;
+		var sj = new JointSpring { spring = 10000, damper = 1 };
 
 		if(IsLeftFlipper) {
 			if(Input.GetKeyUp(KeyCode.LeftArrow) || !TriggerUI || (Game.Instance.AIGame && !TriggerAI)) {
@@ -67,7 +66,6 @@ public class Flipper:MonoBehaviour
 			if(Input.GetKey(KeyCode.RightArrow) || TriggerUI || TriggerAI) {
 				sj.targetPosition = -TargetRotation;
 			}
-
 		}
 
 		_joint.spring = sj;

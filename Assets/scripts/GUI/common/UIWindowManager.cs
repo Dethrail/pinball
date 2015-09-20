@@ -12,6 +12,7 @@ public class UIWindowManager:MonoBehaviour
 	public UIWindow StartupWindow;
 	private Dictionary<UIWindowTypes, UIWindow> _cachedWindows;
 
+	private UIWindowHUD _WindowHUD;
 	public static UIWindowHUD WindowHUD
 	{
 		get
@@ -23,7 +24,29 @@ public class UIWindowManager:MonoBehaviour
 		}
 	}
 
-	private UIWindowHUD _WindowHUD;
+	private UIWindowMenu _windowMenu;
+	public static UIWindowMenu WindowMenu
+	{
+		get
+		{
+			if(Instance._windowMenu == null) {
+				Instance._windowMenu = (Instance.GetWindow(UIWindowTypes.Menu) as UIWindowMenu);
+			}
+			return Instance._windowMenu;
+		}
+	}
+
+	private UIWindowGameOver _windowGameOver;
+	public static UIWindowGameOver WindowGameOver
+	{
+		get
+		{
+			if(Instance._windowGameOver == null) {
+				Instance._windowGameOver = (Instance.GetWindow(UIWindowTypes.GameOver) as UIWindowGameOver);
+			}
+			return Instance._windowGameOver;
+		}
+	}
 
 	private void Awake()
 	{
@@ -58,7 +81,7 @@ public class UIWindowManager:MonoBehaviour
 		}
 	}
 
-	public UIWindow GetWindow(UIWindowTypes uiWindowType)
+	private UIWindow GetWindow(UIWindowTypes uiWindowType)
 	{
 		UIWindow w;
 		if(!string.IsNullOrEmpty(name) && _cachedWindows.TryGetValue(uiWindowType, out w)) {

@@ -20,7 +20,7 @@ public class BallAI:MonoBehaviour
 		if(!AIEnabled) {
 			return;
 		}
-		Flipper flipper = collider.gameObject.GetComponent<Flipper>();
+		Flipper flipper = collider.GetComponent<Flipper>();
 		if(flipper != null) {
 			if((collider.transform.position - transform.position).sqrMagnitude > 1.5f) {
 				if(flipper.IsLeftFlipper && (collider.transform.position - transform.position).x > 0) {
@@ -50,7 +50,7 @@ public class BallAI:MonoBehaviour
 		if(!AIEnabled) {
 			return;
 		}
-		Flipper flipper = collider.gameObject.GetComponent<Flipper>();
+		Flipper flipper = collider.GetComponent<Flipper>();
 		if(flipper != null) {
 			flipper.TriggerAI = false;
 		}

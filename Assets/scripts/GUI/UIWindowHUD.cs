@@ -64,9 +64,8 @@ public class UIWindowHUD:UIWindow
 
 	public void OnMenuClick()
 	{
-		//Debug.Log(EventSystem.current.currentSelectedGameObject);
 		Time.timeScale = 0;
-		UIWindowManager.Instance.GetWindow(UIWindowTypes.Menu).Show();
+		UIWindowManager.WindowMenu.Show();
 	}
 
 	public override void Update()
