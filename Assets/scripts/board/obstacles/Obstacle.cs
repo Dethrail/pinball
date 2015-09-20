@@ -13,7 +13,6 @@ public class Obstacle:MonoBehaviour, IObstacle
 	{
 		get { return (uint)Type; }
 	}
-	[HideInInspector]
 	public int Score;
 	public int GetScore()
 	{
